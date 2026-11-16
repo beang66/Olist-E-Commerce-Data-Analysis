@@ -149,7 +149,7 @@ with tab_state:
     st.plotly_chart(fig, width="stretch")
     st.dataframe(state.rename(columns={v: k for k, v in names.items()}).rename_axis("주(state)").round(2), width="stretch")
 
-# (6) 원본 데이터 확인 · 내려받기
+# (6) 전처리된 주문 데이터 확인 · 내려받기 (원본 Kaggle CSV가 아님)
 with tab_data:
     st.write(f"필터가 적용된 주문 **{len(f_orders):,}건** 중 앞의 1,000건")
     st.dataframe(f_orders.head(1000), width="stretch")
