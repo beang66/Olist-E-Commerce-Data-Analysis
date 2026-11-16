@@ -25,7 +25,29 @@
 
 ## 3. 시스템 구조·데이터·기술
 
-> **확인 필요:** 현 코드 기준 데이터 흐름, 핵심 기술, 외부 서비스·권한 경계를 검증 후 추가.
+### 구성
+
+```
+├── app.py                  ← Streamlit 대시보드 (배포되는 앱)
+├── requirements.txt        ← 배포 서버가 설치할 패키지
+├── .streamlit/config.toml  ← 대시보드 테마
+├── data/
+│   ├── olist_….csv.gz (8개) · product_category_name_translation.csv.gz
+│   │                       ← Kaggle 원본 9개를 압축한 것 (126MB → 44MB) — 노트북 실습용
+│   ├── orders.csv.gz       ← 대시보드용 가공 데이터 (필요한 열만 추려 압축, 약 2.4MB)
+│   └── items.csv.gz
+├── docs/                   ← 학습 교안 PDF
+└── notebooks/              ← 분석 노트북 (실행 결과 포함)
+    ├── 01_데이터이해_고객_매출.ipynb
+    ├── 02_시간패턴_카테고리_배송리뷰.ipynb
+    └── 03_대시보드_만들기와_GitHub_배포.ipynb
+```
+
+| 노트북 | 내용 |
+|---|---|
+| 01 | 9개 테이블의 연결 구조(키), 분석 대상 정의, 고객 수 · 재구매율, 지역, 결제 수단, 객단가, 월별 매출 |
+| 02 | 일 · 요일 · 시간 패턴, 공정한 기간 비교, 카테고리 판매량 vs 매출, 파레토, 배송 기간 · 지연율, 배송 지연과 리뷰 점수, 지역별 배송 |
+| 03 | 배포용 데이터 가공 → `app.py` 작성 → 자동 테스트 → GitHub push → Streamlit Community Cloud 배포 |
 
 ## 4. 핵심 의사결정·대안
 
@@ -71,30 +93,6 @@ Olist, *Brazilian E-Commerce Public Dataset by Olist* (Kaggle), **CC BY-NC-SA 4.
 `data/` 의 `olist_….csv.gz` · `product_category_name_translation.csv.gz` 는 원본 CSV 를 내용 변경 없이 압축만 한 것이고, `orders.csv.gz` · `items.csv.gz` 는 대시보드에 필요한 열만 가공 · 압축한 것입니다. 교육용 프로젝트입니다.
 
 ## 9. 다음 단계·참고 문서
-
-### 구성
-
-```
-├── app.py                  ← Streamlit 대시보드 (배포되는 앱)
-├── requirements.txt        ← 배포 서버가 설치할 패키지
-├── .streamlit/config.toml  ← 대시보드 테마
-├── data/
-│   ├── olist_….csv.gz (8개) · product_category_name_translation.csv.gz
-│   │                       ← Kaggle 원본 9개를 압축한 것 (126MB → 44MB) — 노트북 실습용
-│   ├── orders.csv.gz       ← 대시보드용 가공 데이터 (필요한 열만 추려 압축, 약 2.4MB)
-│   └── items.csv.gz
-├── docs/                   ← 학습 교안 PDF
-└── notebooks/              ← 분석 노트북 (실행 결과 포함)
-    ├── 01_데이터이해_고객_매출.ipynb
-    ├── 02_시간패턴_카테고리_배송리뷰.ipynb
-    └── 03_대시보드_만들기와_GitHub_배포.ipynb
-```
-
-| 노트북 | 내용 |
-|---|---|
-| 01 | 9개 테이블의 연결 구조(키), 분석 대상 정의, 고객 수 · 재구매율, 지역, 결제 수단, 객단가, 월별 매출 |
-| 02 | 일 · 요일 · 시간 패턴, 공정한 기간 비교, 카테고리 판매량 vs 매출, 파레토, 배송 기간 · 지연율, 배송 지연과 리뷰 점수, 지역별 배송 |
-| 03 | 배포용 데이터 가공 → `app.py` 작성 → 자동 테스트 → GitHub push → Streamlit Community Cloud 배포 |
 
 ---
 
